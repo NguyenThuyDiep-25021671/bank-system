@@ -1,0 +1,38 @@
+name: Bank System CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    # Cấu hình Matrix: Khai báo 3 hệ điều hành
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    # Cho phép hệ thống lấy hệ điều hành từ ma trận ở trên để chạy
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Lấy mã nguồn từ kho chứa
+        uses: actions/checkout@v4
+
+      - name: Thiết lập môi trường Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Thực thi vòng đời build của Maven
+        run: mvn clean package
+
+      - name: Lưu giữ tệp .jar
+        uses: actions/upload-artifact@v4
+        with:
+          # Tên file Artifact sẽ tự động gắn thêm tên hệ điều hành để phân biệt
+          name: bank-system-executable-${{ matrix.os }}
+          path: target/*.jar
