@@ -22,7 +22,7 @@ public abstract class Account {
   // Sửa lỗi Tên biến: Đổi accNum thành accountNumber, B thành balance để rõ nghĩa (camelCase)
   private long accountNumber;
   private double balance;
-  protected List<Transaction> transactionList;
+  protected List<Transaction> transactionList
 
   /**
    * Khởi tạo tài khoản với số tài khoản và số dư ban đầu.
