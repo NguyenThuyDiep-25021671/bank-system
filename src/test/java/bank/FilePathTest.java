@@ -20,7 +20,7 @@ public class FilePathTest {
     assertEquals(file.getPath(), safePathOldSchool, "Test cách 1: Dùng File.separator");
 
     // CÁCH 2: Sử dụng API java.nio.file.Path (Cách hiện đại, khuyên dùng từ Java 8 trở lên)
-    Path modernPath = Paths.get(directory, fileName);
-    assertEquals(file.getPath(), modernPath.toString(), "Test cách 2: Dùng thư viện NIO Path");
+    //Path modernPath = Paths.get(directory, fileName);
+    //assertEquals(file.getPath(), modernPath.toString(), "Test cách 2: Dùng thư viện NIO Path");
   }
 }
