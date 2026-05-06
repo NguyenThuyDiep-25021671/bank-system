@@ -1,0 +1,33 @@
+name: Bank System CI
+
+# Kích hoạt (trigger) khi có sự kiện push hoặc pull_request
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Chạy trên máy chủ ảo Linux
+
+    steps:
+      - name: Lấy mã nguồn từ kho chứa (Checkout)
+        uses: actions/checkout@v4
+
+      - name: Thiết lập môi trường Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Thực thi vòng đời build của Maven (Test và Package)
+        # Lệnh package tự động bao gồm cả việc biên dịch và chạy test
+        run: mvn clean package
+
+      - name: Lưu giữ tệp .jar (Upload Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: bank-system-executable
+          path: target/*.jar
