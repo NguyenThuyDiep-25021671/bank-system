@@ -1,26 +1,26 @@
 package bank;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.testng.AssertJUnit.assertEquals;
-
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FilePathTest {
 
   @Test
-  public void testHardcodedWindowsPath() {
+  public void testCrossPlatformPath() {
     String directory = "documents";
     String fileName = "report.txt";
 
-    // CỐ TÌNH TẠO LỖI: Nối chuỗi bằng dấu gạch chéo ngược '\' đặc trưng của Windows
-    String hardcodedPath = directory + "\\" + fileName;
-
-    // Tạo một đối tượng File chuẩn của Java
     File file = new File(directory, fileName);
 
-    // Kiểm tra xem đường dẫn ghép tay có giống đường dẫn chuẩn của hệ thống không
-    assertEquals(hardcodedPath, file.getPath(),
-        "Đường dẫn ghép tay phải khớp với đường dẫn hệ thống sinh ra");
+    // CÁCH 1: Sử dụng File.separator (Java sẽ tự động chọn '\' cho Windows và '/' cho Linux/Mac)
+    String safePathOldSchool = directory + File.separator + fileName;
+    assertEquals(file.getPath(), safePathOldSchool, "Test cách 1: Dùng File.separator");
+
+    // CÁCH 2: Sử dụng API java.nio.file.Path (Cách hiện đại, khuyên dùng từ Java 8 trở lên)
+    Path modernPath = Paths.get(directory, fileName);
+    assertEquals(file.getPath(), modernPath.toString(), "Test cách 2: Dùng thư viện NIO Path");
   }
 }
