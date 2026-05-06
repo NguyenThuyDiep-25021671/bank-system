@@ -1,4 +1,4 @@
-package main.java.bank;
+package bank;
 
 /**
  * Ngoại lệ chung trong hệ thống ngân hàng.

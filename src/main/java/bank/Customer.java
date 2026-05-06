@@ -1,6 +1,4 @@
-package main.java.bank;
-
-import bank.Account;
+package bank;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,4 @@
-package main.java.bank;
-
-import bank.BankException;
+package bank;
 
 import java.util.Locale;
 

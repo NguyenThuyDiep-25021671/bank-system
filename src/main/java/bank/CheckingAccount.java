@@ -1,7 +1,5 @@
-package main.java.bank;
+package bank;
 
-import bank.BankException;
-import bank.Transaction;
 
 /**
  * Tài khoản vãng lai.
